@@ -1,0 +1,40 @@
+table {
+  border: solid 1px #DDEEEE;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font: normal 17px Arial, sans-serif;
+  margin: 0 auto;
+}
+
+table thead th {
+  background-color: #d0d6d6;
+  border: solid 1px #DDEEEE;
+  color: #333;
+  padding: 10px;
+  text-align: left;
+  text-shadow: 1px 1px 1px #fff;
+  text-align: center;
+}
+
+table tbody td {
+  border: solid 1px #DDEEEE;
+  color: #333;
+  padding: 10px;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+form {
+  padding: 20px;
+  text-align: center;
+}
+
+#search {
+  margin-left: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  border: solid 1px #d0d6d6;
+}
+
+label {
+  font-weight: bold;
+}
