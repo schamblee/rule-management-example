@@ -22,7 +22,7 @@ In order to avoid naming specific apps in your rules code, reference the client'
 ```
 function(user, context, callback) {
   context.clientMetadata = context.clientMetadata || {};
-  if (context.clientMetadata.weekdayAccess === ‘true’) {
+  if (context.clientMetadata['rule:weekdayAccess'] === ‘true’) {
     …
   }
 }
