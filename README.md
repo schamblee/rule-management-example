@@ -1,3 +1,5 @@
+![](/demo.gif)
+
 # Auth0 Rules Management Sample App
 
 This is an example of how you can use Auth0's V2 Managment API to keep
