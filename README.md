@@ -15,7 +15,7 @@ Once your applications have their rules data stored in metadata, you can use the
 
 Another benefit of storing rules data within client metadata is that it can simplify your rules scripts.
 
-Rules logic can become complex if you have to hard-code several app names to determine which app the rule should be applied to.
+Rules logic can become complex if you have to hard-code several app names to determine which app the rule applies to.
 
 In order to avoid naming specific apps in your rules code, reference the client's metadata via the rule's context object:
 
@@ -93,7 +93,7 @@ CLIENT_SECRET="Your client secret here"
 
 ## Using Auth0 Rules Management Sample App
 
-To start the sample app, run the command `yarn dev` from the project's root directory which will start the backend api and React client.
+To start the sample app, run the command `yarn dev` from the project's root directory which will start the Node API and React client.
 
 The app will be available at <http://localhost:3000/>
 
