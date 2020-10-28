@@ -32,10 +32,12 @@ To install the sample app, follow these steps:
 
 * Clone the repo and install nodemon globally and the project dependencies
 
-`git clone git@github.com:schamblee/rule-management-example.git`
-`cd rule-management-example`
-`npm i nodemon -g`
-`yarn`
+```
+git clone git@github.com:schamblee/rule-management-example.git
+cd rule-management-example
+npm i nodemon -g
+yarn
+```
 
 ## Using Auth0 Rules Management Sample App
 

@@ -15,7 +15,7 @@ export default function App() {
   }, []);
 
   function search (rows) {
-    return rows.filter(row => row.Rule.toLowerCase().indexOf(filter) > -1);
+    return rows.filter(row => row.Rule.toLowerCase().includes(filter));
   }
 
   return (

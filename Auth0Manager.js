@@ -86,7 +86,7 @@ module.exports = (function() {
    *
    * @param {Array} clients list of clients
    */
-  const formatRules = (clients) => {
+  function formatRules(clients) {
     const clientsWithRules = clients.filter(client => client.client_metadata);
     const rules = clientsWithRules.map(client => {
       const metadataKeys = Object.keys(client.client_metadata);
