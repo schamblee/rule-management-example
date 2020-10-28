@@ -15,7 +15,7 @@ module.exports = (function() {
   return {
     init,
     getClients,
-    updateClient
+    formatRules
   };
 
   /**
@@ -79,19 +79,27 @@ module.exports = (function() {
   }
 
   /**
-   * Update a client
+   * Format client rules data
    * 
-   * Uses given data to update a client
+   * Transforms list of clients into a list of rules using each client's
+   * metadata. Expects rules metadata to be prefixed with "rule:".
    *
-   * @param {object} data     Data used to update the client
-   * @param {string} clientId The client ID of the client to be updated (defaults to env CLIENT_ID)
+   * @param {Array} clients list of clients
    */
-  function updateClient(data, clientId = null) {
-    if (!clientId) clientId = CLIENT_ID;
-
-    return this.managementClient
-      .updateClient({ client_id: clientId }, data)
-      .then(client => client)
-      .catch(err => err);
+  const formatRules = (clients) => {
+    const clientsWithRules = clients.filter(client => client.client_metadata);
+    const rules = clientsWithRules.map(client => {
+      const metadataKeys = Object.keys(client.client_metadata);
+      const ruleNames = metadataKeys.filter(ruleName => ruleName.includes('rule:'));
+      const rule = ruleNames.map(rule => {
+        return {
+          Client: client.name,
+          Rule: rule,
+          Value: client.client_metadata[rule]
+        }
+      });
+      return rule;
+    })
+    return rules.flat();
   }
 })();

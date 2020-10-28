@@ -10,50 +10,32 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/**
+ * Get rules data for all auth0 clients
+ * 
+ * Returns an array of objects containing the following properties:
+ * 
+ * - Client: The name of the application
+ * - Rule: The name of the rule
+ * - Value: The value of the rule (e.g. "true" or "false")
+ * 
+ * example response:
+ * 
+ *   [{
+ *       Client: "example-app-1",
+ *       Rule: "rule:weekendAccess",
+ *       Value: "true"
+ *   }]
+ * 
+ */
 app.get('/client/rules', (req, res) => {
     Auth0Manager.init()
   .then(() => Auth0Manager.getClients())
   .then(clients => {
-    const rules = formatRules(clients);
-    console.log(rules)
-    res.send(rules)
+    const rules = Auth0Manager.formatRules(clients);
+    res.send(rules);
   })
   .catch(console.error);
 });
-
-app.put('/client:client_id/rules', (req, res) => {
-    const updatedData = {
-        client_metadata: {
-            weekdayAccess: req.body.weekdayAccess
-        }
-    };
-    Auth0Manager.init()
-      .then(() => {
-        return Auth0Manager.updateClient(updatedData);
-      })
-      .then(updatedClient => {
-        console.log(updatedClient);
-        return updatedClient;
-      })
-      .catch(err => ({ message: "There was an error!", ...err }));    
-});
-
-const formatRules = (clients) => {
-    const clientsWithRules = clients.filter(client => client.client_metadata);
-    console.log(clientsWithRules)
-    const rules = clientsWithRules.map(client => {
-      const metadataKeys = Object.keys(client.client_metadata);
-      const ruleNames = metadataKeys.filter(ruleName => ruleName.includes('rule:'));
-      const rule = ruleNames.map(rule => {
-        return {
-          Client: client.name,
-          Rule: rule,
-          Value: client.client_metadata[rule]
-        }
-      });
-      return rule;
-    })
-    return rules.flat();
-  }
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
